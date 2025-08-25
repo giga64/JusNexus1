@@ -16,9 +16,11 @@
     "vite": "^7.1.2"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.2.3",
     "@types/react": "^19.1.11",
     "@types/react-dom": "^19.1.7",
     "axios": "^1.11.0",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.541.0",

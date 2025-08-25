@@ -7,3 +7,13 @@
 body {
     @apply bg-nexus-dark text-gray-200;
 }
+
+@layer components {
+  .glass-card {
+    @apply bg-gradient-to-br from-nexus-secondary/30 to-nexus-primary/50 backdrop-blur-lg border border-nexus-accent/20 shadow-xl;
+  }
+  
+  .logo-gradient {
+    @apply bg-gradient-to-r from-nexus-accent to-nexus-purple bg-clip-text text-transparent;
+  }
+}
