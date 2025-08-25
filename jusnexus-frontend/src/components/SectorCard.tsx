@@ -1,31 +1,42 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Card } from './ui/Card';
-import { ArrowRight } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
+import { cn } from '../lib/utils';
 
 interface SectorCardProps {
+  icon: LucideIcon;
   title: string;
   description: string;
-  icon: React.ReactNode;
   path: string;
+  variant: 'reu' | 'autor';
 }
 
-const SectorCard = ({ title, description, icon, path }: SectorCardProps) => {
+const SectorCard: React.FC<SectorCardProps> = ({ icon: Icon, title, description, path, variant }) => {
   const navigate = useNavigate();
+  
+  const colorClasses = variant === 'reu' 
+    ? 'border-blue-500/20 hover:border-blue-400/40 hover:bg-blue-500/5' 
+    : 'border-emerald-500/20 hover:border-emerald-400/40 hover:bg-emerald-500/5';
+
+  const iconColor = variant === 'reu' ? 'text-blue-400' : 'text-emerald-400';
 
   return (
-    <Card
+    <div
       onClick={() => navigate(path)}
-      className="glass-card p-6 flex flex-col items-center text-center cursor-pointer group hover:border-nexus-accent transition-all duration-300 transform hover:-translate-y-2"
+      className={cn(
+        "bg-white/5 backdrop-blur-sm border rounded-xl p-8 text-center cursor-pointer group transition-all duration-300 transform hover:scale-[1.02]",
+        colorClasses
+      )}
     >
-      <div className="text-nexus-accent mb-4 transition-transform duration-300 group-hover:scale-110">
-        {icon}
+      <div className="flex justify-center mb-6">
+        <Icon className={cn("w-12 h-12 transition-transform duration-300 group-hover:scale-110", iconColor)} />
       </div>
-      <h3 className="text-2xl font-bold text-white mb-2">{title}</h3>
-      <p className="text-gray-400 mb-6 flex-grow">{description}</p>
-      <div className="flex items-center text-nexus-accent font-bold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-        Acessar Setor <ArrowRight className="ml-2 h-5 w-5" />
-      </div>
-    </Card>
+      <h3 className="text-xl font-semibold text-white mb-3">{title}</h3>
+      <p className="text-gray-400 mb-6 text-sm leading-relaxed">{description}</p>
+      <button className="w-full bg-gradient-to-r from-gray-800 to-gray-700 hover:from-gray-700 hover:to-gray-600 text-white font-medium py-3 rounded-lg transition-all duration-300 border border-gray-600/50">
+        Acessar Setor
+      </button>
+    </div>
   );
 };
 

@@ -1,37 +1,40 @@
-import { Shield } from 'lucide-react';
+import React from 'react';
+import AssistantCard from '../components/AssistantCard';
+import { FileText, Scale } from 'lucide-react';
 
-const SectorReu = () => {
+const SectorReu: React.FC = () => {
+  const assistants = [
+    {
+      id: 'recursos',
+      name: 'Assistente de Recursos',
+      description: 'Especialista em análise e geração de recursos judiciais.',
+      icon: FileText,
+    },
+    {
+      id: 'contestacao',
+      name: 'Assistente de Contestação',
+      description: 'Especialista em defesas e contestações processuais.',
+      icon: Scale,
+    },
+  ];
+
   return (
-    <div className="flex flex-col items-center justify-center h-full">
-      <div className="text-center mb-8">
-        <div className="flex justify-center mb-4">
-          <Shield size={64} className="text-blue-400" />
+    <div className="flex flex-col items-center">
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-400 to-blue-300 bg-clip-text text-transparent mb-4">Setor BB Réu</h1>
+        <p className="mt-2 text-lg text-gray-400 mb-10">Escolha um assistente especializado em defesa.</p>
+        <div className="w-full max-w-4xl grid grid-cols-1 md:grid-cols-2 gap-8">
+          {assistants.map(assistant => (
+            <AssistantCard
+              key={assistant.id}
+              id={assistant.id}
+              name={assistant.name}
+              description={assistant.description}
+              icon={assistant.icon}
+              sector="reu"
+            />
+          ))}
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">BB Réu</h1>
-        <p className="text-lg text-gray-400 max-w-2xl">
-          Assistentes virtuais especializados na defesa, elaboração de contestações, 
-          recursos e outras manifestações defensivas.
-        </p>
-      </div>
-      
-      <div className="w-full max-w-4xl">
-        <div className="glass-card p-8 text-center">
-          <h2 className="text-2xl font-semibold text-white mb-4">
-            Assistentes em Desenvolvimento
-          </h2>
-          <p className="text-gray-400 mb-6">
-            Esta seção estará disponível em breve com assistentes especializados 
-            para a defesa jurídica.
-          </p>
-          <div className="flex justify-center">
-            <div className="animate-pulse bg-blue-400/20 rounded-lg p-4">
-              <Shield size={32} className="text-blue-400" />
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };
-
 export default SectorReu;

@@ -5,6 +5,7 @@ import Dashboard from '../pages/Dashboard';
 import AdminDashboard from '../pages/AdminDashboard';
 import SectorReu from '../pages/SectorReu';
 import SectorAutor from '../pages/SectorAutor';
+import AssistantChat from '../pages/AssistantChat';
 import ProtectedRoute from './ProtectedRoute';
 import AppLayout from '../layouts/AppLayout';
 
@@ -16,17 +17,22 @@ const AppRoutes = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Rotas Protegidas para Usuários Logados */}
+        {/* Rotas Protegidas com o Layout Padrão */}
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<AppLayout><Dashboard /></AppLayout>} />
-          <Route path="/" element={<AppLayout><Dashboard /></AppLayout>} />
-          <Route path="/setor/reu" element={<AppLayout><SectorReu /></AppLayout>} />
-          <Route path="/setor/autor" element={<AppLayout><SectorAutor /></AppLayout>} />
+          <Route element={<AppLayout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/setor/reu" element={<SectorReu />} />
+            <Route path="/setor/autor" element={<SectorAutor />} />
+            <Route path="/assistant/:sector/:assistant" element={<AssistantChat />} />
+          </Route>
         </Route>
 
-        {/* Rotas Protegidas apenas para Admins */}
+        {/* Rotas de Admin */}
         <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
-          <Route path="/admin" element={<AppLayout><AdminDashboard /></AppLayout>} />
+           <Route element={<AppLayout />}>
+             <Route path="/admin" element={<AdminDashboard />} />
+           </Route>
         </Route>
 
         {/* Rota Padrão */}
